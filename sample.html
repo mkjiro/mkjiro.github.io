@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>サイトのタイトル</title>
+	<script>
+		window.onload = function(){
+			var ctx = document.getElementById('myCanvas').getContext('2d');
+			var canvas = document.getElementById('myCanvas');
+			var canvassizeX=678, canvassizeY=399;
+			
+			ctx.fillStyle = 'rgb(65,65,133)';
+			ctx.fillRect(0,0,canvassizeX,canvassizeY);
+		}
+	</script>
+	
+</head>
+<body background="img\\back.gif">
+	<h1 id="top">HTML5を学習中</h1>
+	<section>
+		<h2>画像・写真・コードリストなど、自己完結しているメイン・コンテンツから参照されるようなコンテンツを表します</h2>
+		<figure>
+			<img src="img\\yukuri.jpg" alt="ゆっくり霊夢"/>
+			<figcaption>ゆっくり霊夢</figcaption>
+		</figure>
+	</section>
+	
+	<section>
+		<h2>リンクの張り方</h2>
+		<a href="http://www.yahoo.jp/">
+			<div class="topics">
+			<p>yahooへ</p>
+		</a>
+	</section>
+	
+	<section>
+		<h2>情報の引用元タイトルやテーマ（人名はダメ)</h2>
+		<br>
+		<cite>とあるサイト</cite>
+		<br>
+	</section>
+	
+	<section>
+		<h2>用語の定義と用語の解説の組み合わせ</h2>
+		<dl>
+			<dt><dfn>著者</dfn></dt>
+			<dt>山田太郎</dt>
+		</dl>
+	<section>
+	
+	<div style="background:black;color:white;padding:3px;" id="messageBar">test</div>
+	<div style="background:black;color:white;padding:3px;" id="score1Bar">player1:0</div>
+	<div style="background:black;color:white;padding:3px;" id="score2Bar">player2:0</div>
+	<canvas id="myCanvas" width="678" height="399"></canvas>
+	
+	
+	<a href="#top">トップへ戻る</a>
+</body>
+</html>
