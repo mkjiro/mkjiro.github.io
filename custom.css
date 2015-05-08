@@ -1,0 +1,160 @@
+﻿@charset "utf-8";
+
+
+/*----参考サイト：http://www.tagindex.com/template/menu/hor1_menu5.html-------------/
+/* --- ナビゲーションバー --- */
+div.nav {
+width: 100%; /* ナビゲーションの幅 */
+background: #4e83b3 url(./pic/hor_menu6_off.gif) repeat-x top; /* ナビゲーションの背景 */
+border-top: 2px #84aed2 solid; /* 上境界線 */
+border-bottom: 2px #2c5170 solid; /* 下境界線 */
+font-size: 80%;
+}
+
+/* --- メニューエリア --- */
+div.nav ul.nl {
+width: 600px; /* メニューの幅 */
+margin: 0 auto; /* センターに配置 */
+padding: 0;
+background: #4e83b3 url(./pic/hor_menu6_off.gif) repeat-x top; /* メニューの背景 */
+border-left: 1px #2c5170 solid; /* メニューの左境界線 */
+border-right: 1px #84aed2 solid; /* メニューの右境界線 */
+list-style-type: none;
+text-align: center;
+}
+
+/* --- メニュー項目 --- */
+div.nav ul.nl li {
+width: 20%; /* 項目の幅 */
+float: left;
+}
+
+/* --- リンク --- */
+div.nav ul.nl li a {
+display: block;
+position: relative; /* IE6用 */
+padding: 7px 2px 4px; /* リンクエリアのパディング（上、左右、下） */
+border-left: 1px #84aed2 solid; /* リンクエリアの左境界線 */
+border-right: 1px #2c5170 solid; /* リンクエリアの右境界線 */
+text-decoration: none; /* テキストの下線（なし） */
+font-weight: bold; /* 文字の太さ（太字） */
+color: #ffffff; /* 文字色 */
+line-height: 100%; /* 行の高さ */
+}
+/* 英字部分 */
+div.nav ul.nl li a span.en {
+display: block;
+margin-top: 2px; /* 英字部分の上マージン */
+font-size: 85%; /* 英字の文字サイズ */
+font-weight: normal; /* 文字の太さ（ノーマル） */
+color: #eee8aa; /* 英字の文字色 */
+}
+/* --- ポイント時の設定 --- */
+div.nav ul.nl li a:hover {
+background: #5e91bd url(./pic/hor_menu6_on.gif) repeat-x top; /* ポイント時の背景 */
+}
+div.nav ul.nl li a:hover span.en {
+color: #fde337; /* ポイント時の英字の文字色 */
+}
+
+/* --- clearfix --- */
+.clearFix:after {
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+.clearFix {
+min-height: 1px;
+}
+
+/* --- 参考サイト：http://www.tagindex.com/template/layout/3column_fix1.html ---*/
+
+/* --- 全体の背景・テキスト --- */
+body {
+margin: 0;
+padding: 0;
+background-color: #ffffff; /* ページの背景色 */
+background-image: url(./pic/blue_background.jpg);
+color: #000000; /* 全体の文字色 */
+font-size: 100%; /* 全体の文字サイズ */
+}
+
+/* --- 全体のリンクテキスト --- */
+a:link { color: #0000ff; }
+a:visited { color: #800080; }
+a:hover { color: #ff0000; }
+a:active { color: #ff0000; }
+
+/* --- コンテナ --- */
+#container {
+width: 780px; /* ページの幅 */
+margin: 0 auto; /* センタリング */
+background: url(./pic/sidebar_200.gif) repeat-y right; /* サイドバーの背景画像 */
+background-color: #ffffff; /* メインカラムの背景色 */
+border-left: 1px #c0c0c0 solid; /* 左の境界線 */
+border-right: 1px #c0c0c0 solid; /* 右の境界線 */
+}
+
+/* --- ヘッダ --- */
+#header {
+background-color: #ffe080; /* ヘッダの背景色 */
+}
+
+/* --- ナビゲーション --- */
+#nav {
+float: right;
+width: 200px; /* サイドバーの幅 */
+}
+
+/* --- メインカラム --- */
+#content {
+float: right;
+width: 580px; /* メインカラムの幅 */
+}
+
+/* --- フッタ --- */
+#footer {
+clear: right; /* フロートのクリア */
+width: 100%;
+background-color: #ffe080; /* フッタの背景色 */
+}
+
+
+/*---参考サイト：http://www.webopixel.net/javascript/538.html----*/
+/*---スクロール関係-----*/
+#page-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 77%;
+}
+#page-top a {
+    background: #666;
+    text-decoration: none;
+    color: #fff;
+    width: 100px;
+    padding: 30px 0;
+    text-align: center;
+    display: block;
+    border-radius: 5px;
+}
+#page-top a:hover {
+    text-decoration: none;
+    background: #999;
+}
+
+/*---オマケスイルカ関係-----*/
+#iruka {
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+    background-image: url(./pic/iruka.png);
+    width: 100%;
+    height: 100%;
+    padding: 30px 0;
+    border-radius: 5px;
+
+}
+
