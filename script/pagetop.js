@@ -22,18 +22,18 @@ $(function() {
 
 //オマケスイルカ
 $(function() {
-	var topBtn = $('#iruka');	
-	topBtn.hide();
+	var iruka = $('#iruka');	
+	iruka.hide();
 	$(window).scroll(function () {
 		if ($(this).scrollTop() > 100) {
-			topBtn.fadeIn();
+			iruka.fadeIn();
 		} else {
-			topBtn.fadeOut();
+			iruka.fadeOut();
 		}
 	});
 	//スクロールしてトップ
-    topBtn.click(function () {
-		topBtn.hide("slow");
-		return false;
-    });
+  iruka.click(function () {
+	iruka.hide("slow");
+	return false;
+  });
 });
