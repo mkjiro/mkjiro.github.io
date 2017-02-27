@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Face</title>
+		<script type="text/javascript" src="ccv.js"></script>
+		<script type="text/javascript" src="face.js"></script>
+		<script type="text/javascript" src="overface.js"></script>
+	</head>
+	<body ondrop="onDrop(event);" ondragover="onDragOver(event);">  
+	<img id="image_source" >
+	<p>
+	<input type="file" id="inputfile" accept="image/jpeg,image/png,image/gif,image/bmp" onchange="onAddFile(event);">
+	<br>
+	<form name="effectCheck">
+	<input type="radio" name="Effection" id="Radio1" value="RetRect" checked>赤枠
+	<input type="radio" name="Effection" id="Radio2" value="Mosaic">モザイク
+	<input type="radio" name="Effection" id="Radio3" value="Warai">笑い男
+	<input type="radio" name="Effection" id="Radio4" value="ShuffleFaces">顔面入れ替え
+	</form>
+	</p>
+	<p></p>
+	<canvas id="SrcCanvas"></canvas>
+	</body>
+</html>
