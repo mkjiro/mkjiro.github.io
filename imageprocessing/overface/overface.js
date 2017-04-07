@@ -176,43 +176,68 @@ function overlapWaraiface(comp){
 
 //顔面をシャッフルする
 function shuffleFaces(comp){
-	var srcData = src_ctx.getImageData(0, 0, src_canvas.width, src_canvas.height);
+	var srcData = src_ctx.getImageData(0, 0, src_canvas.width, src_canvas.height);	//入力画像（貼り付ける顔）
 	//var dstData = src_ctx.createImageData(src_canvas.width, src_canvas.height);
-	var dstData = src_ctx.getImageData(0, 0, src_canvas.width, src_canvas.height);
+	var dstData = src_ctx.getImageData(0, 0, src_canvas.width, src_canvas.height);	//出力画像（下の顔）
 	var src = srcData.data;
 	var dst = dstData.data;
 
-	var zrs = 1;	//ずらしサイズ
-	var blendlevel = 40;	//ブレンディングレベル
+	var zrs = 1;				//ずらしサイズ
+	var blenddistraito = 0.7;	//ブレンディングを行う距離（画像端がスタートで中心がゴール：0～1）
 	for(var num = 0;num < comp.length;num++){
 		var dnum = num;
 		var snum = (num+zrs)%comp.length;
 		var dy = parseInt(comp[num].y), dx = parseInt(comp[num].x);
 		var sy = parseInt(comp[(num+zrs)%comp.length].y),sx = parseInt(comp[(num+zrs)%comp.length].x);
+		var dhalfwidth = comp[num].width/2;
+		var dhalfheight = comp[num].height/2;
+		var dwmax = dhalfwidth;
+		var dwmin = dhalfwidth*blenddistraito;
+		var dhmax = dhalfheight;
+		var dhmin = dhalfheight*blenddistraito;
+		//貼り付け先の平均色を求める
+		var avecolor = {r:0,g:0,b:0};
+		var limitsimilarity = 20;
+		for(var j = 0;j < comp[dnum].height;j++){
+			for(var i = 0;i < comp[dnum].width;i++){
+				var didx = ((i+dx) + (j+dy)*image.width)*4;
+				avecolor.r += dst[didx+0];
+				avecolor.g += dst[didx+1];
+				avecolor.b += dst[didx+2];
+			}
+		}
+		avecolor.r /= comp[dnum].height*comp[dnum].width;
+		avecolor.g /= comp[dnum].height*comp[dnum].width;
+		avecolor.b /= comp[dnum].height*comp[dnum].width;
+
+		console.log(comp[num]);
+
+		//dstへsrcのトリミング範囲をコピー
 		for(var j = 0;j < comp[num].height;j++){
 			for(var i = 0;i < comp[num].width;i++){
 				var didx = ((i+dx) + (j+dy)*image.width)*4;
-				var sidx = ((parseInt(i*(comp[snum].width/comp[dnum].width))+sx)
+				var sidx = ((parseInt(i*(comp[snum].width/comp[dnum].width))+sx)	//ニアレストネイバー
 				 + (parseInt(j*(comp[snum].height/comp[dnum].height))+sy)*image.width)*4;
-				//dstへsrcのトリミング範囲をコピー
-				if((j < blendlevel || comp[num].height - blendlevel < j ) 
-					||( i < blendlevel || comp[num].width - blendlevel < i )){
-					//アルファブレンディングのパラメータ設定
-					var alphaj = 1;
-					if(j < blendlevel || comp[num].height - blendlevel < j)
-						alphaj = j < blendlevel ? j / blendlevel :  (comp[num].height - j)/blendlevel;
-					var alphai = 1;
-					if(i < blendlevel || comp[num].width - blendlevel < i)
-						alphai = i < blendlevel ? i / blendlevel :  (comp[num].width - i)/blendlevel;
-					var alpha = (alphaj + alphai)/2;					 
-					dst[didx+0] = (src[sidx+0] * alpha + dst[didx+0] * (1-alpha));
-					dst[didx+1] = (src[sidx+1] * alpha + dst[didx+1] * (1-alpha));
-					dst[didx+2] = (src[sidx+2] * alpha + dst[didx+2] * (1-alpha));
+				//色合いを似せる(予定)
+				var alpha;	//アルファブレンディングのパラメータ設定(交換先画像：0～1：交換元画像)
+				var dis = Math.sqrt(Math.pow(j-dhalfheight,2) + Math.pow(i-dhalfwidth,2));	//中心からの長さ
+				if(comp[num].width < comp[num].height){
+					alpha = (dis - dwmin)/(dwmax - dwmin);
 				}else{
-					dst[didx+0] = src[sidx+0];
-					dst[didx+1] = src[sidx+1];
-					dst[didx+2] = src[sidx+2];
+					alpha = (dis - dhmin)/(dhmax - dhmin);
 				}
+				//console.log(alpha);
+				alpha = alpha < 1.0 ? alpha : 1.0;
+				alpha = alpha > 0.0 ? alpha : 0.0;
+				//貼り付け先の色が平均値に近い場合は貼り付け先の色にする
+				var diff = (Math.abs(avecolor.r - dst[didx+0]) + Math.abs(avecolor.g - dst[didx+1]) + Math.abs(avecolor.b - dst[didx+2]));
+				if(limitsimilarity > diff){
+					//alpha = 1.0;
+				}													 
+				//アルファブレンディング
+				dst[didx+0] = (src[sidx+0] * (1-alpha) + dst[didx+0] * (alpha));
+				dst[didx+1] = (src[sidx+1] * (1-alpha) + dst[didx+1] * (alpha));
+				dst[didx+2] = (src[sidx+2] * (1-alpha) + dst[didx+2] * (alpha));
 			}
 		}
 	}
